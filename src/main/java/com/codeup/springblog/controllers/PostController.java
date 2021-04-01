@@ -31,7 +31,7 @@ public class PostController {
     @PostMapping("/posts/create")
     @ResponseBody
     public String createPost(){
-        return "sumbit a new post here";
+        return "submit a new post here";
     }
 
 
