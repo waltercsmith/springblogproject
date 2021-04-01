@@ -5,13 +5,22 @@
 
 <main class="container">
     <div class="post">
-        <h1 th:text="${post.title}"></h1>
-        <p th:text="${post.body}"></p>
+        <h1 th:text="${ad.title}"></h1>
+        <p th:text="${ad.description}"></p>
         <!--        <p>You can contact me at <a th:text="${post.owner.email}" th:href="${'mailto:' + post.owner.email}">here</a></p>-->
     </div>
-</main>
+
+
+
+        <form th:action="${'/ads/' + ad.id + '/delete'}">
+
+                <input type="submit" value="delete ad">
+
+        </form>
+
 
 <p>Show</p>
+</main>
 
 </body>
 </html>

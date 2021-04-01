@@ -29,8 +29,8 @@ public class AdController {
 
 
     @GetMapping("/ads/{id}")
-    public String showOneAd(@PathVariable int id, Model vModel){
-        vModel.addAttribute("post", new Post("iPad", "Pro 11in"));
+    public String showOneAd(@PathVariable Long id, Model vModel){
+        vModel.addAttribute("ad", adDao.getOne(id));
         return "ads/show";
     }
 
@@ -79,4 +79,16 @@ public class AdController {
 
         return "You updated an Ad!!! Good job";
     }
+
+    @PostMapping("/ads/{id}/delete")
+    @ResponseBody
+    public String deleteAd(@PathVariable Long id){
+
+        adDao.deleteById(id);
+
+        return "You deleted an ad";
+
+    }
+
+
 }
