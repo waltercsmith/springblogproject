@@ -3,6 +3,25 @@
 <head th:replace="fragments/header :: main-head('Update Ad')"></head>
 
 <body>
+        <form th:action="${'/ads/' + oldAd.id + '/update'}" method="post">
 
+
+            <h2>Create Ad Form</h2>
+
+        <br>
+
+
+            <label for="ad_title">Title</label>
+            <input type="text" name="ad_title" id="ad_title" th:value="${oldAd.title}">
+
+            <br>
+
+            <label for="ad_description">Description</label>
+            <input type="text" name="ad_description" id="ad_description" th:value="${oldAd.description}">
+
+            <br>
+
+            <input type="submit" value="update ad">
+        </form>
 </body>
 </html>

@@ -6,10 +6,7 @@ import com.codeup.springblog.repos.AdRepository;
 import com.codeup.springblog.repos.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,16 +37,46 @@ public class AdController {
 
 
     @GetMapping("/ads/create")
-    @ResponseBody
+
     public String viewAdForm(){
-        return "will come here to create a new post";
+        return "/ads/create";
     }
+
+
 
     @PostMapping("/ads/create")
     @ResponseBody
-    public String createAd(){
-        return "submit a new post here";
+    public String createAd(@RequestParam("ad_title") String title, @RequestParam("ad_description") String description){
+        Ad adToSave = new Ad(title, description);
+
+        adDao.save(adToSave);
+
+
+
+        return "You created an Ad!!! Good job";
+    }
+
+    @GetMapping("/ads/{id}/update")
+
+    public String updateAdForm(@PathVariable Long id, Model model){
+
+        Ad adFromDB = adDao.getOne(id);
+
+        model.addAttribute("oldAd", adFromDB);
+
+        return "/ads/update";
     }
 
 
+    @PostMapping("/ads/{id}/update")
+    @ResponseBody
+    public String updateAd(@PathVariable Long id,@RequestParam("ad_title") String title, @RequestParam("ad_description") String description){
+        Ad adToSave = new Ad(id,title, description);
+
+        adDao.save(adToSave);
+
+
+
+        return "You updated an Ad!!! Good job";
+    }
 }
