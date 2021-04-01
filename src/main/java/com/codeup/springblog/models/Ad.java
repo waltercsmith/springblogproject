@@ -3,6 +3,7 @@ package com.codeup.springblog.models;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "ads")
 public class Ad {
     public Long getId() {
         return id;

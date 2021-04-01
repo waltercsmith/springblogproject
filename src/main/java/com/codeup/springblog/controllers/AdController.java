@@ -23,7 +23,7 @@ public class AdController {
 
 
     @GetMapping("/ads")
-    public String seeAllads(Model viewModel){
+    public String seeAllAds(Model viewModel){
         List<Ad> adsFromDB = adDao.findAll();
         viewModel.addAttribute("ads", adsFromDB);
         return "ads/index";
@@ -32,7 +32,7 @@ public class AdController {
 
 
     @GetMapping("/ads/{id}")
-    public String showOnePost(@PathVariable int id, Model vModel){
+    public String showOneAd(@PathVariable int id, Model vModel){
         vModel.addAttribute("post", new Post("iPad", "Pro 11in"));
         return "ads/show";
     }
@@ -41,13 +41,13 @@ public class AdController {
 
     @GetMapping("/ads/create")
     @ResponseBody
-    public String viewPostForm(){
+    public String viewAdForm(){
         return "will come here to create a new post";
     }
 
     @PostMapping("/ads/create")
     @ResponseBody
-    public String createPost(){
+    public String createAd(){
         return "submit a new post here";
     }
 
