@@ -29,7 +29,7 @@ public class PostController {
 //    List<Post> posts = new ArrayList<>();
     @GetMapping("/posts")
     public String seeAllPosts(Model viewModel){
-        List<Post> postsFromDB = postDao.findAll();
+        List<Post> postsFromDB = postDao.searchByBodyLike("post");
         viewModel.addAttribute("posts", postsFromDB);
         return "posts/index";
     }
