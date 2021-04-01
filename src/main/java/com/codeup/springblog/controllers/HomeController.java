@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
 
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String welcome() {
         return "home";
     }

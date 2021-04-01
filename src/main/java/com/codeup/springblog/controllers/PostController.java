@@ -2,6 +2,7 @@ package com.codeup.springblog.controllers;
 
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.repos.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,28 +16,25 @@ import java.util.List;
 @Controller
 public class PostController {
 
-    List<Post> posts = new ArrayList<>();
+    private final PostRepository postDao;
+    // whenever we use this controller (PostController) we will use the default controller
+
+
+    // injected this in our controller
+    public PostController(PostRepository postDao){
+        this.postDao = postDao;
+    }
+
+
+//    List<Post> posts = new ArrayList<>();
     @GetMapping("/posts")
     public String seeAllPosts(Model viewModel){
-        posts.add(new Post("PS5", "Brand new"));
-        posts.add(new Post("Xbox X", "Brand new"));
-        posts.add(new Post("N Switch", "Used"));
-        viewModel.addAttribute("posts", posts);
-        // do not use a / to reference a template
+        List<Post> postsFromDB = postDao.findAll();
+        viewModel.addAttribute("posts", postsFromDB);
         return "posts/index";
     }
 
-//    @GetMapping("/posts")
-//    @ResponseBody
-//    public String hello() {
-//        return "posts index page";
-//    }
 
-//    @GetMapping("/posts")
-//    public String index() {
-//
-//        return "/posts/index";
-//    }
 
     @GetMapping("/posts/{id}")
     public String showOnePost(@PathVariable int id, Model vModel){
@@ -44,30 +42,19 @@ public class PostController {
         return "posts/show";
     }
 
-//    @GetMapping("/show")
-//    public String show() {
-//
-//        return "/posts/show";
-//    }
 
 
-//    @GetMapping("/posts/{id}")
-//    @ResponseBody
-//    public String viewIndividualPost(@PathVariable int id) {
-//        return "view an individual post id of: " + id;
-//    }
-//
-//    @GetMapping("/posts/create")
-//    @ResponseBody
-//    public String viewPostForm(){
-//        return "will come here to create a new post";
-//    }
-//
-//    @PostMapping("/posts/create")
-//    @ResponseBody
-//    public String createPost(){
-//        return "submit a new post here";
-//    }
+    @GetMapping("/posts/create")
+    @ResponseBody
+    public String viewPostForm(){
+        return "will come here to create a new post";
+    }
+
+    @PostMapping("/posts/create")
+    @ResponseBody
+    public String createPost(){
+        return "submit a new post here";
+    }
 
 
 }
