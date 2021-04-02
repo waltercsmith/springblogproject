@@ -2,7 +2,7 @@ package com.codeup.springblog.controllers;
 
 
 import com.codeup.springblog.models.Post;
-import com.codeup.springblog.repos.PostRepository;
+//import com.codeup.springblog.repos.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,21 +16,21 @@ import java.util.List;
 @Controller
 public class PostController {
 
-    private final PostRepository postDao;
+//    private final PostRepository postDao;
     // whenever we use this controller (PostController) we will use the default controller
 
 
     // injected this in our controller
-    public PostController(PostRepository postDao){
-        this.postDao = postDao;
-    }
+//    public PostController(PostRepository postDao){
+//        this.postDao = postDao;
+//    }
 
 
 //    List<Post> posts = new ArrayList<>();
     @GetMapping("/posts")
     public String seeAllPosts(Model viewModel){
-        List<Post> postsFromDB = postDao.searchByBodyLike("post");
-        viewModel.addAttribute("posts", postsFromDB);
+//        List<Post> postsFromDB = postDao.searchByBodyLike("post");
+//        viewModel.addAttribute("posts", postsFromDB);
         return "posts/index";
     }
 
@@ -38,7 +38,7 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String showOnePost(@PathVariable int id, Model vModel){
-        vModel.addAttribute("post", new Post("iPad", "Pro 11in"));
+//        vModel.addAttribute("post", new Post("iPad", "Pro 11in"));
         return "posts/show";
     }
 
