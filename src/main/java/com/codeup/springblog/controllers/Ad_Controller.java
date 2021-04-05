@@ -48,4 +48,25 @@ public class Ad_Controller {
 
         return "You created an ad!";
     }
+
+
+    @GetMapping("ads/{id}/update")
+    public String updateAdForm(@PathVariable Long id, Model model){
+
+        Ad_Model adFromDb = adDao.getOne(id);
+        model.addAttribute("oldAd", adFromDb);
+
+        return "ads/update";
+    }
+
+    @PostMapping("ads/{id}/update")
+    @ResponseBody
+    public String updateAd(@PathVariable Long id ,@RequestParam("ad_title") String title, @RequestParam("ad_description") String description){
+
+        Ad_Model adToSave = new Ad_Model(title,description);
+        adDao.save(adToSave);
+
+        return "You updated an ad.";
+
+    }
 }
