@@ -1,11 +1,12 @@
 package com.codeup.springblog.models;
 
-//import javax.persistence.*;
 
 
-//@Entity
-//
-//@Table(name = "post")
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "posts")
 public class Post {
 
 //    public Long getId() {
@@ -16,11 +17,15 @@ public class Post {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
 //
-//    @Column(length = 225, nullable = false)
+    @Column(length = 225, nullable = false)
     private String title;
-//
-//    @Column(columnDefinition = "TEXT", length = 3000, nullable = false)
+
+    @Column(columnDefinition = "TEXT", length = 2000, nullable = false)
     private String body;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     public Post(){
 
@@ -47,11 +52,17 @@ public class Post {
         this.body = body;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    public Long getId() {
+        return id;
+    }
+
+
+
 
 
 }

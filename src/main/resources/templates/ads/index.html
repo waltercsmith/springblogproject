@@ -5,8 +5,8 @@
 
 <main class="container">
     <div class="post" th:each="ad : ${ads}">
-        <h1 th:text="${ad.title}"></h1>
-        <p th:text="${ad.description}"></p>
+        <h1 th:text="${ads.title}"></h1>
+        <p th:text="${ads.description}"></p>
 
     </div>
     <p>Index</p>
