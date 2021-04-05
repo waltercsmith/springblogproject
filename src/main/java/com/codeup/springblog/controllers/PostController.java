@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Controller
@@ -30,7 +30,7 @@ public class PostController {
 //    List<Post> posts = new ArrayList<>();
     @GetMapping("/posts")
     public String seeAllPosts(Model viewModel){
-        List<Post> postsFromDB = postDao.searchByBodyLike("post");
+        List<Post> postsFromDB = postDao.findAll();
         viewModel.addAttribute("posts", postsFromDB);
         return "posts/index";
     }
@@ -38,8 +38,8 @@ public class PostController {
 
 
     @GetMapping("/posts/{id}")
-    public String showOnePost(@PathVariable int id, Model vModel){
-//        vModel.addAttribute("post", new Post("iPad", "Pro 11in"));
+    public String showOnePost(@PathVariable Long id, Model vModel){
+        vModel.addAttribute("posts", new Post(id));
         return "posts/show";
     }
 

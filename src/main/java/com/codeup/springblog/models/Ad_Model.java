@@ -18,18 +18,19 @@ public class Ad_Model {
     @Column( nullable = false, columnDefinition = "TEXT")
     private String Description;
 
+
     public Ad_Model() {
     }
 
     public Ad_Model(Long id, String title, String description) {
         this.id = id;
-        Title = title;
-        Description = description;
+        this.Title = title;
+        this.Description = description;
     }
 
     public Ad_Model(String title, String description) {
-        Title = title;
-        Description = description;
+        this.Title = title;
+        this.Description = description;
     }
 
 
@@ -46,7 +47,7 @@ public class Ad_Model {
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.Title = title;
     }
 
     public String getDescription() {
@@ -54,6 +55,6 @@ public class Ad_Model {
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.Description = description;
     }
 }

@@ -3,12 +3,10 @@ package com.codeup.springblog.controllers;
 import com.codeup.springblog.models.Ad_Model;
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.repos.Ad_Repository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class Ad_Controller {
     }
 
     @GetMapping("/ads")
-    public String seeAllads(Model viewModel){
+    public String seeAllAds(Model viewModel){
         List<Ad_Model> adsFromDB = adDao.findAll();
         viewModel.addAttribute("ads", adsFromDB);
         return "ads/index";
@@ -30,20 +28,24 @@ public class Ad_Controller {
     }
 
     @GetMapping("/ads/{id}")
-    public String showOnePost(@PathVariable int id, Model vModel){
+    public String showOneAd(@PathVariable int id, Model vModel){
 //        vModel.addAttribute("post", new Post("iPad", "Pro 11in"));
         return "ads/show";
     }
 
     @GetMapping("/ads/create")
-    @ResponseBody
-    public String viewPostForm(){
-        return "will come here to create a new post";
+
+    public String viewAdForm(){
+        return "ads/create";
     }
 
     @PostMapping("/ads/create")
     @ResponseBody
-    public String createPost(){
-        return "submit a new post here";
+    public String createAd(@RequestParam("ad_title") String title, @RequestParam("ad_description") String description ){
+
+        Ad_Model adToSave = new Ad_Model(title, description);
+        adDao.save(adToSave);
+
+        return "You created an ad!";
     }
 }
