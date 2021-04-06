@@ -28,14 +28,15 @@ public class Ad_Controller {
     }
 
     @GetMapping("/ads/{id}")
-    public String showOneAd(@PathVariable int id, Model vModel){
-//        vModel.addAttribute("post", new Post("iPad", "Pro 11in"));
+    public String showOneAd(@PathVariable Long id, Model vModel){
+        vModel.addAttribute("ad", adDao.getOne(id));
         return "ads/show";
     }
 
     @GetMapping("/ads/create")
 
     public String viewAdForm(){
+
         return "ads/create";
     }
 
@@ -61,12 +62,26 @@ public class Ad_Controller {
 
     @PostMapping("ads/{id}/update")
     @ResponseBody
-    public String updateAd(@PathVariable Long id ,@RequestParam("ad_title") String title, @RequestParam("ad_description") String description){
+    public String updateAd(@PathVariable Long id , @RequestParam("ad_title") String title, @RequestParam("ad_description") String description){
 
-        Ad_Model adToSave = new Ad_Model(title,description);
+
+        Ad_Model adToSave = new Ad_Model(id,title,description);
+
         adDao.save(adToSave);
 
-        return "You updated an ad.";
+        return "You updated ad number: " + id ;
 
     }
+
+//   Did not use a get mapping for the delete function
+
+    @PostMapping("/ads/{id}/delete")
+    @ResponseBody
+    public String deleteAd(@PathVariable Long id){
+        adDao.deleteById(id);
+        return "You deleted an ad.";
+
+    }
+
+
 }
