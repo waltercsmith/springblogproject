@@ -18,8 +18,16 @@ public class Ad_Model {
     @Column( nullable = false, columnDefinition = "TEXT")
     private String Description;
 
+    @OneToOne
+    private User_Model owner;
 
     public Ad_Model() {
+    }
+
+    public Ad_Model(String title, String description, User_Model owner) {
+        Title = title;
+        Description = description;
+        this.owner = owner;
     }
 
     public Ad_Model(Long id, String title, String description) {
@@ -57,4 +65,14 @@ public class Ad_Model {
     public void setDescription(String description) {
         this.Description = description;
     }
+
+
+    public User_Model getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User_Model owner) {
+        this.owner = owner;
+    }
 }
+
